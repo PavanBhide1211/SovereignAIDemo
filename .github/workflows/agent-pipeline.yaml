@@ -1,0 +1,28 @@
+name: Sovereign AI Agent Pipeline
+on:
+  schedule:
+    - cron: '*/10 * * * *' # Executes every 10 minutes
+  workflow_dispatch:      # Allows manual trigger
+
+jobs:
+  run-agents:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.10'
+
+      - name: Install Dependencies
+        run: pip install -r requirements.txt
+
+      - name: Execute Orchestrator
+        env:
+          AI_API_KEY: ${{ secrets.AI_API_KEY }}
+          ONEDRIVE_CLIENT_ID: ${{ secrets.ONEDRIVE_CLIENT_ID }}
+          ONEDRIVE_CLIENT_SECRET: ${{ secrets.ONEDRIVE_CLIENT_SECRET }}
+          ONEDRIVE_REFRESH_TOKEN: ${{ secrets.ONEDRIVE_REFRESH_TOKEN }}
+        run: python agent_orchestrator.py
