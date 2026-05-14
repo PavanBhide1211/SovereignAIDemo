@@ -1,0 +1,11 @@
+{
+  "task_id": "DE_ISO26262_001",
+  "client": "Mittelstand_Auto_GmbH",
+  "target_agent": "industrial_agent",
+  "priority": "critical",
+  "payload": {
+    "component": "Electronic Power Steering (EPS)",
+    "safety_goal": "Prevent unintended steering intervention",
+    "requirement": "Verify ASIL D compliance for the diagnostic manager logic."
+  }
+}
